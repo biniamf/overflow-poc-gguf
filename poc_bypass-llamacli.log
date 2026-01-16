@@ -1,0 +1,52 @@
+./llama.cpp/build/bin/llama-cli -m poc_bypass.gguf         
+ggml_metal_device_init: testing tensor API for f16 support
+ggml_metal_library_compile_pipeline: compiling pipeline: base = 'dummy_kernel', name = 'dummy_kernel'
+ggml_metal_library_compile_pipeline: loaded dummy_kernel                                  0x107397e00 | th_max = 1024 | th_width =   32
+ggml_metal_device_init: testing tensor API for bfloat support
+ggml_metal_library_init_from_source: error compiling source
+ggml_metal_device_init: - the tensor API does not support bfloat - disabling bfloat support
+ggml_metal_library_init: using embedded metal library
+ggml_metal_library_init: loaded in 0.011 sec
+ggml_metal_rsets_init: creating a residency set collection (keep_alive = 180 s)
+ggml_metal_device_init: GPU name:   Apple M5
+ggml_metal_device_init: GPU family: MTLGPUFamilyApple10  (1010)
+ggml_metal_device_init: GPU family: MTLGPUFamilyCommon3 (3003)
+ggml_metal_device_init: GPU family: MTLGPUFamilyMetal4  (5002)
+ggml_metal_device_init: simdgroup reduction   = true
+ggml_metal_device_init: simdgroup matrix mul. = true
+ggml_metal_device_init: has unified memory    = true
+ggml_metal_device_init: has bfloat            = false
+ggml_metal_device_init: has tensor            = true
+ggml_metal_device_init: use residency sets    = true
+ggml_metal_device_init: use shared buffers    = true
+ggml_metal_device_init: recommendedMaxWorkingSetSize  = 12713.12 MB
+register_backend: registered backend Metal (1 devices)
+register_device: registered device Metal (Apple M5)
+register_backend: registered backend BLAS (1 devices)
+register_device: registered device BLAS (Accelerate)
+register_backend: registered backend CPU (1 devices)
+register_device: registered device CPU (Apple M5)
+
+Loading model... |/Users/biniamdemissie/Documents/llamacpp/llama.cpp/src/llama-hparams.cpp:35: fatal error
+WARNING: Using native backtrace. Set GGML_BACKTRACE_LLDB for more info.
+WARNING: GGML_BACKTRACE_LLDB may cause native MacOS Terminal.app to crash.
+See: https://github.com/ggml-org/llama.cpp/pull/17869
+0   libggml-base.0.9.5.dylib            0x0000000106559a28 ggml_print_backtrace_symbols + 48
+1   libggml-base.0.9.5.dylib            0x00000001065597b0 ggml_print_backtrace + 160
+2   libggml-base.0.9.5.dylib            0x0000000106559d30 ggml_abort + 664
+3   libllama.0.0.7751.dylib             0x0000000105586e48 _ZNK13llama_hparams9n_head_kvEj + 0
+4   libllama.0.0.7751.dylib             0x00000001055e8978 _ZN11llama_model12load_hparamsER18llama_model_loader + 2580
+5   libllama.0.0.7751.dylib             0x00000001054bf234 _ZL16llama_model_loadRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERNS_6vectorIS5_NS3_IS5_EEEER11llama_modelR18llama_model_params + 584
+6   libllama.0.0.7751.dylib             0x00000001054b2bb0 _ZL31llama_model_load_from_file_implRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERNS_6vectorIS5_NS3_IS5_EEEE18llama_model_params + 2192
+7   libllama.0.0.7751.dylib             0x00000001054b2290 llama_model_load_from_file + 84
+8   libllama.0.0.7751.dylib             0x00000001054b3a94 _ZL28llama_get_device_memory_dataPKcPK18llama_model_paramsPK20llama_context_paramsRNSt3__16vectorIP19ggml_backend_deviceNS7_9allocatorISA_EEEERjSF_SF_14ggml_log_level + 208
+9   libllama.0.0.7751.dylib             0x00000001054af020 _ZL21llama_params_fit_implPKcP18llama_model_paramsP20llama_context_paramsPfP32llama_model_tensor_buft_overridePmj14ggml_log_level + 168
+10  libllama.0.0.7751.dylib             0x00000001054aedbc llama_params_fit + 92
+11  llama-cli                           0x0000000102cd0fe8 _ZN18common_init_resultC2ER13common_params + 412
+12  llama-cli                           0x0000000102cd27a4 _ZN18common_init_resultC1ER13common_params + 36
+13  llama-cli                           0x0000000102cd29bc _Z23common_init_from_paramsR13common_params + 64
+14  llama-cli                           0x0000000102aaf894 _ZN19server_context_impl10load_modelERK13common_params + 244
+15  llama-cli                           0x0000000102aaf77c _ZN14server_context10load_modelERK13common_params + 36
+16  llama-cli                           0x00000001029a45f8 main + 476
+17  dyld                                0x00000001907d5d54 start + 7184
+zsh: abort      ./llama.cpp/build/bin/llama-cli -m poc_bypass.gguf
