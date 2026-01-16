@@ -1,0 +1,23 @@
+llama-cli -m crash_minimal.gguf 
+
+Loading model... |/private/tmp/llama.cpp-20260114-5318-1562sw/ggml/src/ggml.c:3782: GGML_ASSERT(a->ne[2] == b->ne[1]) failed
+WARNING: Using native backtrace. Set GGML_BACKTRACE_LLDB for more info.
+WARNING: GGML_BACKTRACE_LLDB may cause native MacOS Terminal.app to crash.
+See: https://github.com/ggml-org/llama.cpp/pull/17869
+0   libggml-base.0.9.5.dylib            0x0000000103bcf875 ggml_print_backtrace + 273
+1   libggml-base.0.9.5.dylib            0x0000000103bcfab7 ggml_abort + 250
+2   libggml-base.0.9.5.dylib            0x0000000103bd4079 ggml_get_rows + 296
+3   libllama.0.0.7730.dylib             0x0000000103d98fd4 _ZL18select_weight_buftRK13llama_hparamsP11ggml_tensor7ggml_opRKNSt3__16vectorINS5_4pairIP19ggml_backend_deviceP24ggml_backend_buffer_typeEENS5_9allocatorISC_EEEE + 1308
+4   libllama.0.0.7730.dylib             0x0000000103d92ae5 _ZZN11llama_model12load_tensorsER18llama_model_loaderENK3$_3clERK11LLM_TN_IMPLRKSt16initializer_listIxEi + 1149
+5   libllama.0.0.7730.dylib             0x0000000103d52f71 _ZN11llama_model12load_tensorsER18llama_model_loader + 3937
+6   libllama.0.0.7730.dylib             0x0000000103cf2e7d _ZL31llama_model_load_from_file_implRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERNS_6vectorIS5_NS3_IS5_EEEE18llama_model_params + 2235
+7   libllama.0.0.7730.dylib             0x0000000103cf2566 llama_model_load_from_file + 104
+8   libllama.0.0.7730.dylib             0x0000000103cf3e5d _ZL28llama_get_device_memory_dataPKcPK18llama_model_paramsPK20llama_context_paramsRNSt3__16vectorIP19ggml_backend_deviceNS7_9allocatorISA_EEEERjSF_SF_14ggml_log_level + 244
+9   libllama.0.0.7730.dylib             0x0000000103cef46e _ZL21llama_params_fit_implPKcP18llama_model_paramsP20llama_context_paramsPfP32llama_model_tensor_buft_overridePmj14ggml_log_level + 204
+10  libllama.0.0.7730.dylib             0x0000000103cef296 llama_params_fit + 82
+11  llama-cli                           0x000000010373fc72 _ZN18common_init_resultC2ER13common_params + 274
+12  llama-cli                           0x000000010374132b _Z23common_init_from_paramsR13common_params + 50
+13  llama-cli                           0x0000000103629af1 _ZN19server_context_impl10load_modelERK13common_params + 173
+14  llama-cli                           0x00000001035cd221 main + 321
+15  dyld                                0x00007ff80263f530 start + 3056
+[1]    31399 abort      llama-cli -m crash_minimal.gguf
