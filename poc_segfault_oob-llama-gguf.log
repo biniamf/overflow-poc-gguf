@@ -1,0 +1,61 @@
+./llama.cpp/build/bin/llama-gguf poc_segfault_oob.gguf r n
+gguf_ex_read_0: version:      3
+gguf_ex_read_0: alignment:   32
+gguf_ex_read_0: data offset: 608
+gguf_ex_read_0: n_kv: 12
+gguf_ex_read_0: kv[0]: key = general.alignment
+gguf_ex_read_0: kv[1]: key = general.architecture
+gguf_ex_read_0: kv[2]: key = general.name
+gguf_ex_read_0: kv[3]: key = llama.context_length
+gguf_ex_read_0: kv[4]: key = llama.embedding_length
+gguf_ex_read_0: kv[5]: key = llama.block_count
+gguf_ex_read_0: kv[6]: key = llama.attention.head_count
+gguf_ex_read_0: kv[7]: key = llama.attention.head_count_kv
+gguf_ex_read_0: kv[8]: key = tokenizer.ggml.model
+gguf_ex_read_0: kv[9]: key = tokenizer.ggml.tokens
+gguf_ex_read_0: kv[10]: key = tokenizer.ggml.scores
+gguf_ex_read_0: kv[11]: key = tokenizer.ggml.token_type
+gguf_ex_read_0: find key: some.parameter.string not found.
+gguf_ex_read_0: n_tensors: 1
+gguf_ex_read_0: tensor[0]: name = test.weight, size = 18446744073709551612, offset = 0
+gguf_ex_read_1: version:      3
+gguf_ex_read_1: alignment:   32
+gguf_ex_read_1: data offset: 608
+gguf_ex_read_1: n_kv: 12
+gguf_ex_read_1: kv[0]: key = general.alignment
+gguf_ex_read_1: kv[1]: key = general.architecture
+gguf_ex_read_1: kv[2]: key = general.name
+gguf_ex_read_1: kv[3]: key = llama.context_length
+gguf_ex_read_1: kv[4]: key = llama.embedding_length
+gguf_ex_read_1: kv[5]: key = llama.block_count
+gguf_ex_read_1: kv[6]: key = llama.attention.head_count
+gguf_ex_read_1: kv[7]: key = llama.attention.head_count_kv
+gguf_ex_read_1: kv[8]: key = tokenizer.ggml.model
+gguf_ex_read_1: kv[9]: key = tokenizer.ggml.tokens
+gguf_ex_read_1: kv[10]: key = tokenizer.ggml.scores
+gguf_ex_read_1: kv[11]: key = tokenizer.ggml.token_type
+gguf_ex_read_1: n_tensors: 1
+gguf_ex_read_1: tensor[0]: name = test.weight, size = 18446744073709551612, offset = 0, type = f32, n_elts = 4611686018427387903
+gguf_ex_read_1: reading tensor 0 data
+gguf_ex_read_1: tensor[0]: n_dims = 1, ne = (-1, 1, 1, 1), name = test.weight, data = 0x0
+UndefinedBehaviorSanitizer:DEADLYSIGNAL
+==81262==ERROR: UndefinedBehaviorSanitizer: SEGV on unknown address 0x000000000000 (pc 0x00010034797c bp 0x00016faba970 sp 0x00016faba800 T2984230)
+==81262==The signal is caused by a READ memory access.
+==81262==Hint: address points to the zero page.
+    #0 0x00010034797c in gguf_ex_read_1(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&, bool) gguf.cpp:216
+    #1 0x0001003469b4 in main gguf.cpp:266
+    #2 0x0001907d5d50 in start+0x1c0c (dyld:arm64e+0x3d50)
+
+==81262==Register values:
+ x[0] = 0x000000000000000a   x[1] = 0x000000010034d2ac   x[2] = 0x00000000000120a8   x[3] = 0x0000000a08c0c018  
+ x[4] = 0x000000010034d29d   x[5] = 0x000000016faba800   x[6] = 0x0000000000000020   x[7] = 0x0000000000000180  
+ x[8] = 0x0000000000000000   x[9] = 0x0000000000000000  x[10] = 0x0000000000000001  x[11] = 0x0000000000000001  
+x[12] = 0x00000000fffffffd  x[13] = 0x0000000000000000  x[14] = 0x0000000000000000  x[15] = 0x0000000000000000  
+x[16] = 0x0000000101917d94  x[17] = 0x00000001feb91e50  x[18] = 0x0000000000000000  x[19] = 0x00000001fd2b0060  
+x[20] = 0x00000001fd55ab88  x[21] = 0x00000001fd2b0dd0  x[22] = 0xfffffffffffffff0  x[23] = 0x00000001fd55e2a0  
+x[24] = 0x0000000000000001  x[25] = 0x000000016fababf0  x[26] = 0x00000001fd55e2b0  x[27] = 0x0000000000000000  
+x[28] = 0x0000000000000000     fp = 0x000000016faba970     lr = 0x0000000100347934     sp = 0x000000016faba800  
+UndefinedBehaviorSanitizer can not provide additional info.
+SUMMARY: UndefinedBehaviorSanitizer: SEGV gguf.cpp:216 in gguf_ex_read_1(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&, bool)
+==81262==ABORTING
+test.weight data[:10] : zsh: abort      ./llama.cpp/build/bin/llama-gguf poc_segfault_oob.gguf r n
