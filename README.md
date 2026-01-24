@@ -1,6 +1,9 @@
 ### Summary
 An integer overflow vulnerability exists in the `ggml_nbytes()` function in `ggml/src/ggml.c`. When processing specially crafted GGUF model files with malicious tensor dimensions, the function performs unchecked arithmetic that overflows `size_t`, returning an incorrectly small byte count. This leads to undersized memory allocations and subsequent heap buffer overflows when tensor data is written.
 
+### Affected version
+- Confirmed on <= b7815
+
 ### Affected Code
 
 **File:** `ggml/src/ggml.c`
